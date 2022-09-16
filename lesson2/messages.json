@@ -1,0 +1,21 @@
+{
+    "select": "Please select the language: \n 1) English \n 2) Romanian",
+    "ro": {
+        "intro": "Bun venit la Calculator!",
+        "question1": "Care e primul numar?",
+        "question2": "Care e al doilea numar?",
+        "question3": "Ce operatie ai vrea sa faci? \n 1) Adunare \n 2) Scadere \n 3) Inmultire \n 4) Impartire",
+        "invalidNumber": "Numarul pe care la-ti ales nu este valid, incearca din nou",
+        "invalidOperation": "Trebuie sa alegi dintre 1, 2, 3 sau 4, te rog alege din nou",
+        "result": "Rezultatul este: "
+    },
+    "en": {
+        "intro": "Welcome to the Calculator!",
+        "question1": "What is the first number?",
+        "question2": "What is the second number?",
+        "question3": "What operation would you like to perform? \n 1) Add \n 2) Subtract \n 3) Multiply \n 4) Divide",
+        "invalidOperation": "Must choose 1, 2, 3 or 4, please select again: ",
+        "invalidNumber": "The number you've entered is invalid. Please try again",
+        "result": "The result is: "
+    }
+}
