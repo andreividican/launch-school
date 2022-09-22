@@ -1,48 +1,46 @@
-const readLine = require('readline-sync');
-const messages = require('./messages.json');
+const readLine = require("readline-sync");
+const messages = require("./messages.json");
 
-const prompt = msg => console.log(`>>> ${msg}`);
+const prompt = (msg) => console.log(`>>> ${msg}`);
 
-const invalidNumber = num => {
-  return num.trimStart() === '' || Number.isNaN(Number(num));
+const invalidNumber = (num) => {
+  return num.trimStart() === "" || Number.isNaN(Number(num));
 };
 
 prompt(messages.select);
 let language = readLine.question();
 let selectedLanguage;
 switch (language) {
-  case '1':
+  case "1":
     selectedLanguage = true;
     break;
-  case '2':
+  case "2":
     selectedLanguage = false;
     break;
 }
 
 const INTRO = selectedLanguage ? messages.en.intro : messages.ro.intro;
-const QUESTION1 = selectedLanguage ?
-  messages.en.question1 :
-  messages.ro.question1;
+const QUESTION1 = selectedLanguage
+  ? messages.en.question1
+  : messages.ro.question1;
 
-const QUESTION2 = selectedLanguage ?
-  messages.en.question2 :
-  messages.ro.question2;
+const QUESTION2 = selectedLanguage
+  ? messages.en.question2
+  : messages.ro.question2;
 
-const QUESTION3 = selectedLanguage ?
-  messages.en.question3 :
-  messages.ro.question3;
+const QUESTION3 = selectedLanguage
+  ? messages.en.question3
+  : messages.ro.question3;
 
-const INVALID_NUMBER = selectedLanguage ?
-  messages.en.invalidNumber :
-  messages.ro.invalidNumber;
+const INVALID_NUMBER = selectedLanguage
+  ? messages.en.invalidNumber
+  : messages.ro.invalidNumber;
 
-const INVALID_OPERATION = selectedLanguage ?
-  messages.en.invalidNumber :
-  messages.ro.invalidNumber;
+const INVALID_OPERATION = selectedLanguage
+  ? messages.en.invalidNumber
+  : messages.ro.invalidNumber;
 
-const RESULT = selectedLanguage ?
-  messages.en.result :
-  messages.ro.result;
+const RESULT = selectedLanguage ? messages.en.result : messages.ro.result;
 
 prompt(INTRO);
 prompt(QUESTION1);
@@ -64,7 +62,7 @@ while (invalidNumber(num2)) {
 prompt(QUESTION3);
 let operation = readLine.question();
 
-while (!['1', '2', '3', '4'].includes(operation)) {
+while (!["1", "2", "3", "4"].includes(operation)) {
   prompt(INVALID_OPERATION);
   operation = readLine.question();
 }
@@ -72,19 +70,18 @@ while (!['1', '2', '3', '4'].includes(operation)) {
 let output;
 
 switch (operation) {
-  case '1':
+  case "1":
     output = Number(num1) + Number(num2);
     break;
-  case '2':
+  case "2":
     output = Number(num1) - Number(num2);
     break;
-  case '3':
+  case "3":
     output = Number(num1) * Number(num2);
     break;
-  case '4':
+  case "4":
     output = Number(num1) / Number(num2);
     break;
 }
 
 prompt(RESULT + output);
-
