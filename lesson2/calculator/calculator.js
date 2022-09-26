@@ -1,6 +1,6 @@
 const readLine = require("readline-sync");
 const messages = require("./messages.json");
-
+const POSSIBLE_OPERATIONS = ["1", "2", "3", "4"];
 const prompt = (msg) => console.log(`>>> ${msg}`);
 
 const invalidNumber = (num) => {
@@ -62,7 +62,7 @@ while (invalidNumber(num2)) {
 prompt(QUESTION3);
 let operation = readLine.question();
 
-while (!["1", "2", "3", "4"].includes(operation)) {
+while (!POSSIBLE_OPERATIONS.includes(operation)) {
   prompt(INVALID_OPERATION);
   operation = readLine.question();
 }

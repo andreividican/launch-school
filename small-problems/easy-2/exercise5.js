@@ -31,22 +31,22 @@ function toPower(base, power) {
 const POWER = (num, power) => {
   return power === 1 ? num : PRODUCT(num, toPower(num, power - 1));
 };
-let RESULT;
+let result;
 if (operation === '1') {
-  RESULT = ADDITION(num1,num2);
+  result = ADDITION(num1,num2);
 } else if (operation === '2') {
-  RESULT = SUBSTRACTION(num1, num2);
+  result = SUBSTRACTION(num1, num2);
 } else if (operation === '4') {
-  RESULT = QUONTIENT(num1, num2);
+  result = QUONTIENT(num1, num2);
 } else if (operation === '3') {
-  RESULT = PRODUCT(num1, num2);
+  result = PRODUCT(num1, num2);
 } else if (operation === '5') {
-  RESULT = REMAINDER(num1, num2);
+  result = REMAINDER(num1, num2);
 } else if (operation === '6') {
-  RESULT = POWER(num1, num2);
+  result = POWER(num1, num2);
 }
 
-console.log(RESULT);
+console.log(result);
 
 // Solution:
 const readlineSync = require("readline-sync");

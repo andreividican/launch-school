@@ -4,11 +4,11 @@ const prompt = (msg) => console.log(`>>> ${msg}`);
 
 prompt(`Welcome to the Loan Calculator!`);
 prompt(`What amount would you like to borrow?`);
-const LOAN_AMOUNT = readLine.questionFloat();
+const loanAmount = readLine.questionFloat();
 prompt("For how many years?");
-const LOAN_DURATION = readLine.questionFloat();
+const loanDuration = readLine.questionFloat();
 prompt("What is the APR?");
-const APR = readLine.questionFloat();
+const annualPercentageRate = readLine.questionFloat();
 
 const yearsToMonths = (years) => years * 12;
 const calculateMonthlyInterest = (aprPercentage) => {
@@ -25,4 +25,4 @@ function loanResult(loanAmount, apr, loanDuration) {
   return `The monthly payment will be: $${monthlyPayment.toFixed(2)}`;
 }
 
-console.log(loanResult(LOAN_AMOUNT, APR, LOAN_DURATION));
+console.log(loanResult(loanAmount, annualPercentageRate, loanDuration));
