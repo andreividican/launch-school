@@ -1,15 +1,17 @@
 const readLine = require("readline-sync");
 const messages = require("./messages.json");
-const POSSIBLE_OPERATIONS = ["1", "2", "3", "4"];
-const prompt = (msg) => console.log(`>>> ${msg}`);
 
+const POSSIBLE_OPERATIONS = ["1", "2", "3", "4"];
+
+const prompt = (message) => console.log(`>>> ${message}`);
 const invalidNumber = (num) => {
   return num.trimStart() === "" || Number.isNaN(Number(num));
 };
+const getUserInput = () => readLine.question(">").toLowerCase();
 
 prompt(messages.select);
-let language = readLine.question();
 let selectedLanguage;
+let language = readLine.question(">");
 switch (language) {
   case "1":
     selectedLanguage = true;
@@ -17,71 +19,97 @@ switch (language) {
   case "2":
     selectedLanguage = false;
     break;
+  default:
+    // TODO: When no valid language selected
+    console.log(selectedLanguage);
+    break;
 }
+const intro = selectedLanguage ? messages.en.intro : messages.ro.intro;
+const outro = selectedLanguage ? messages.en.outro : messages.ro.outro;
 
-const INTRO = selectedLanguage ? messages.en.intro : messages.ro.intro;
-const QUESTION1 = selectedLanguage
+const question1 = selectedLanguage
   ? messages.en.question1
   : messages.ro.question1;
 
-const QUESTION2 = selectedLanguage
+const question2 = selectedLanguage
   ? messages.en.question2
   : messages.ro.question2;
 
-const QUESTION3 = selectedLanguage
+const question3 = selectedLanguage
   ? messages.en.question3
   : messages.ro.question3;
 
-const INVALID_NUMBER = selectedLanguage
+const invalidInput = selectedLanguage
   ? messages.en.invalidNumber
   : messages.ro.invalidNumber;
 
-const INVALID_OPERATION = selectedLanguage
-  ? messages.en.invalidNumber
-  : messages.ro.invalidNumber;
+const invalidOperation = selectedLanguage
+  ? messages.en.invalidOperation
+  : messages.ro.invalidOperation;
 
-const RESULT = selectedLanguage ? messages.en.result : messages.ro.result;
+const question4 = selectedLanguage
+  ? messages.en.question4
+  : messages.ro.question4;
 
-prompt(INTRO);
-prompt(QUESTION1);
-let num1 = readLine.question();
+const playAgain = selectedLanguage
+  ? messages.en.newOperation
+  : messages.ro.newOperation;
 
-while (invalidNumber(num1)) {
-  prompt(INVALID_NUMBER);
-  num1 = readLine.question();
-}
+const result = selectedLanguage ? messages.en.result : messages.ro.result;
 
-prompt(QUESTION2);
-let num2 = readLine.question();
+prompt(intro);
 
-while (invalidNumber(num2)) {
-  prompt(INVALID_NUMBER);
-  num2 = readLine.question();
-}
+while (true) {
+  prompt(question1);
+  let num1 = readLine.question(">");
+  while (invalidNumber(num1)) {
+    prompt(invalidInput);
+    num1 = readLine.question(">");
+  }
 
-prompt(QUESTION3);
-let operation = readLine.question();
+  prompt(question2);
+  let num2 = readLine.question(">");
+  while (invalidNumber(num2)) {
+    prompt(invalidInput);
+    num2 = readLine.question(">");
+  }
 
-while (!POSSIBLE_OPERATIONS.includes(operation)) {
-  prompt(INVALID_OPERATION);
-  operation = readLine.question();
-}
+  prompt(question3);
+  let operation = readLine.question(">");
 
-let output;
+  while (!POSSIBLE_OPERATIONS.includes(operation)) {
+    prompt(invalidOperation);
+    operation = readLine.question(">");
+  }
 
-switch (operation) {
-  case "1":
-    output = Number(num1) + Number(num2);
+  let output;
+
+  switch (operation) {
+    case "1":
+      output = Number(num1) + Number(num2);
+      break;
+    case "2":
+      output = Number(num1) - Number(num2);
+      break;
+    case "3":
+      output = Number(num1) * Number(num2);
+      break;
+    case "4":
+      output = Number(num1) / Number(num2);
+      break;
+  }
+  prompt(result + output);
+
+  prompt(question4);
+  let userAnswer = getUserInput();
+
+  while (userAnswer[0] !== "n" && userAnswer[0] !== "y") {
+    prompt(playAgain);
+    userAnswer = getUserInput();
+  }
+
+  if (userAnswer[0] === "n") {
+    prompt(outro);
     break;
-  case "2":
-    output = Number(num1) - Number(num2);
-    break;
-  case "3":
-    output = Number(num1) * Number(num2);
-    break;
-  case "4":
-    output = Number(num1) / Number(num2);
-    break;
+  }
 }
-
-prompt(RESULT + output);
