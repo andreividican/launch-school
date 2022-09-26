@@ -1,6 +1,6 @@
 {
-    "select": "Please select the language: \n 1) English \n 2) Romanian",
-    "validLanguage": "Please select between English or Romanian",
+    "select": "Please select the language: \n 1) English \n 2) Romanian \n 3) Spanish",
+    "validLanguage": "Invalid selection. Please select between: \n 1) English \n 2) Romanian \n 3) Spanish",
     "ro": {
         "intro": "Bun venit la Calculator!",
         "question1": "Care e primul numar?",
@@ -24,5 +24,17 @@
         "result": "The result is: ",
         "newOperation": "Please enter 'y' or 'n'",
         "outro": "Bye bye 👋"
+    },
+    "es": {
+        "intro": "Bienvenida a la calculadora",
+        "question1": "Cuál es el primer número?",
+        "question2": "Cuál es el segundo número?",
+        "question3": "Qué operación le gustaría realizar? \n 1) Sumar \n 2) Restar \n 3) Multiplicar \n 4) Dividir",
+        "question4": "Le gustaría realizar otra operación? (y/n)",
+        "invalidOperation": "Debe elegir 1, 2, 3 o 4, seleccione de nuevo: ",
+        "invalidNumber": "El número que has introducido no es válido. Inténtalo de nuevo",
+        "result": "El resultado es: ",
+        "newOperation": "Por favor ingrese 'y' o 'n'",
+        "outro": "Adiós 👋"
     }
 }

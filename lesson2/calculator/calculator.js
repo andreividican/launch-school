@@ -1,5 +1,5 @@
 const readLine = require("readline-sync");
-const messages = require("./messages.json");
+const MESSAGES = require("./messages.json");
 
 const POSSIBLE_OPERATIONS = ["1", "2", "3", "4"];
 
@@ -9,53 +9,73 @@ const invalidNumber = (num) => {
 };
 const getUserInput = () => readLine.question(">").toLowerCase();
 
-prompt(messages.select);
+prompt(MESSAGES.select);
 let selectedLanguage;
 let language = readLine.question(">");
-switch (language) {
-  case "1":
-    selectedLanguage = true;
+
+function checkLang(lang) {
+  if (lang === "1") {
+    selectedLanguage = "en";
+  } else if (lang === "2") {
+    selectedLanguage = "ro";
+  } else if (lang === "3") {
+    selectedLanguage = "es";
+  } else {
+    prompt(MESSAGES.validLanguage);
+    language = readLine.question(">");
+    checkLang(language);
+  }
+}
+checkLang(language);
+let intro;
+let outro;
+let question1;
+let question2;
+let question3;
+let question4;
+let invalidInput;
+let invalidOperation;
+let playAgain;
+let result;
+
+switch (selectedLanguage) {
+  case "en":
+    intro = MESSAGES.en.intro;
+    outro = MESSAGES.en.outro;
+    question1 = MESSAGES.en.question1;
+    question2 = MESSAGES.en.question2;
+    question3 = MESSAGES.en.question3;
+    question4 = MESSAGES.en.question4;
+    invalidInput = MESSAGES.en.invalidNumber;
+    invalidOperation = MESSAGES.en.invalidOperation;
+    playAgain = MESSAGES.en.playAgain;
+    result = MESSAGES.en.result;
     break;
-  case "2":
-    selectedLanguage = false;
+  case "ro":
+    intro = MESSAGES.ro.intro;
+    outro = MESSAGES.ro.outro;
+    question1 = MESSAGES.ro.question1;
+    question2 = MESSAGES.ro.question2;
+    question3 = MESSAGES.ro.question3;
+    question4 = MESSAGES.ro.question4;
+    invalidInput = MESSAGES.ro.invalidNumber;
+    invalidOperation = MESSAGES.ro.invalidOperation;
+    playAgain = MESSAGES.ro.playAgain;
+    result = MESSAGES.ro.result;
     break;
-  default:
-    // TODO: When no valid language selected
-    console.log(selectedLanguage);
+  case "es":
+    intro = MESSAGES.es.intro;
+    outro = MESSAGES.es.outro;
+    question1 = MESSAGES.es.question1;
+    question2 = MESSAGES.es.question2;
+    question3 = MESSAGES.es.question3;
+    question4 = MESSAGES.es.question4;
+    invalidInput = MESSAGES.es.invalidNumber;
+    invalidOperation = MESSAGES.es.invalidOperation;
+    playAgain = MESSAGES.es.playAgain;
+    result = MESSAGES.es.result;
     break;
 }
-const intro = selectedLanguage ? messages.en.intro : messages.ro.intro;
-const outro = selectedLanguage ? messages.en.outro : messages.ro.outro;
-
-const question1 = selectedLanguage
-  ? messages.en.question1
-  : messages.ro.question1;
-
-const question2 = selectedLanguage
-  ? messages.en.question2
-  : messages.ro.question2;
-
-const question3 = selectedLanguage
-  ? messages.en.question3
-  : messages.ro.question3;
-
-const invalidInput = selectedLanguage
-  ? messages.en.invalidNumber
-  : messages.ro.invalidNumber;
-
-const invalidOperation = selectedLanguage
-  ? messages.en.invalidOperation
-  : messages.ro.invalidOperation;
-
-const question4 = selectedLanguage
-  ? messages.en.question4
-  : messages.ro.question4;
-
-const playAgain = selectedLanguage
-  ? messages.en.newOperation
-  : messages.ro.newOperation;
-
-const result = selectedLanguage ? messages.en.result : messages.ro.result;
 
 prompt(intro);
 
