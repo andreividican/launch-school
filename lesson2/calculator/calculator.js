@@ -1,6 +1,5 @@
 const readLine = require("readline-sync");
 const MESSAGES = require("./messages.json");
-
 const POSSIBLE_OPERATIONS = ["1", "2", "3", "4"];
 
 const prompt = (message) => console.log(`>>> ${message}`);
@@ -13,7 +12,7 @@ prompt(MESSAGES.select);
 let selectedLanguage;
 let language = readLine.question(">");
 
-function checkLang(lang) {
+function checkLanguage(lang) {
   if (lang === "1") {
     selectedLanguage = "en";
   } else if (lang === "2") {
@@ -23,10 +22,10 @@ function checkLang(lang) {
   } else {
     prompt(MESSAGES.validLanguage);
     language = readLine.question(">");
-    checkLang(language);
+    checkLanguage(language);
   }
 }
-checkLang(language);
+checkLanguage(language);
 let intro;
 let outro;
 let question1;
