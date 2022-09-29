@@ -9,7 +9,7 @@ const yearsToMonths = (years) => {
 const isValidLoanAmount = (loan) => {
   while (loan <= 0) {
     prompt("Please enter a valid amount. Amount has to be greater than 0.");
-    loan = readLine.question();
+    loan = readLine.questionFloat();
   }
   console.log(loan);
   return loan;
@@ -45,7 +45,7 @@ const calculateMonthlyPayment = (amount, apr, duration) => {
 
 prompt(`Welcome to the Loan Calculator!`);
 prompt(`What amount would you like to borrow?`);
-const loanAmount = readLine.question();
+const loanAmount = readLine.questionFloat();
 isValidLoanAmount(loanAmount);
 prompt("For how many years?");
 const loanDuration = readLine.questionFloat();
