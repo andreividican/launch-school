@@ -26,106 +26,89 @@ function checkLanguage(lang) {
   }
 }
 checkLanguage(language);
-let intro;
-let outro;
-let question1;
-let question2;
-let question3;
-let question4;
-let invalidInput;
-let invalidOperation;
-let playAgain;
-let result;
+let intro = MESSAGES[selectedLanguage].intro;
+let outro = MESSAGES[selectedLanguage].outro;
+let firstNumber = MESSAGES[selectedLanguage].firstNumber;
+let secondNumber = MESSAGES[selectedLanguage].secondNumber;
+let operationType = MESSAGES[selectedLanguage].operationType;
+let runAgain = MESSAGES[selectedLanguage].runAgain;
+let invalidInput = MESSAGES[selectedLanguage].invalidNumber;
+let invalidOperation = MESSAGES[selectedLanguage].invalidOperation;
+let newOperation = MESSAGES[selectedLanguage].newOperation;
+let invalidDivizion = MESSAGES[selectedLanguage].invalidDivision;
+let result = MESSAGES[selectedLanguage].result;
 
-switch (selectedLanguage) {
-  case "en":
-    intro = MESSAGES.en.intro;
-    outro = MESSAGES.en.outro;
-    question1 = MESSAGES.en.question1;
-    question2 = MESSAGES.en.question2;
-    question3 = MESSAGES.en.question3;
-    question4 = MESSAGES.en.question4;
-    invalidInput = MESSAGES.en.invalidNumber;
-    invalidOperation = MESSAGES.en.invalidOperation;
-    playAgain = MESSAGES.en.playAgain;
-    result = MESSAGES.en.result;
-    break;
-  case "ro":
-    intro = MESSAGES.ro.intro;
-    outro = MESSAGES.ro.outro;
-    question1 = MESSAGES.ro.question1;
-    question2 = MESSAGES.ro.question2;
-    question3 = MESSAGES.ro.question3;
-    question4 = MESSAGES.ro.question4;
-    invalidInput = MESSAGES.ro.invalidNumber;
-    invalidOperation = MESSAGES.ro.invalidOperation;
-    playAgain = MESSAGES.ro.playAgain;
-    result = MESSAGES.ro.result;
-    break;
-  case "es":
-    intro = MESSAGES.es.intro;
-    outro = MESSAGES.es.outro;
-    question1 = MESSAGES.es.question1;
-    question2 = MESSAGES.es.question2;
-    question3 = MESSAGES.es.question3;
-    question4 = MESSAGES.es.question4;
-    invalidInput = MESSAGES.es.invalidNumber;
-    invalidOperation = MESSAGES.es.invalidOperation;
-    playAgain = MESSAGES.es.playAgain;
-    result = MESSAGES.es.result;
-    break;
-}
-
-prompt(intro);
-
-while (true) {
-  prompt(question1);
-  let num1 = readLine.question(">");
-  while (invalidNumber(num1)) {
+const askForFirstNumber = () => {
+  prompt(firstNumber);
+  let number = readLine.question(">");
+  while (invalidNumber(number)) {
     prompt(invalidInput);
-    num1 = readLine.question(">");
+    number = readLine.question(">");
   }
+  return number;
+};
 
-  prompt(question2);
-  let num2 = readLine.question(">");
-  while (invalidNumber(num2)) {
+const askForSecondNumber = () => {
+  prompt(secondNumber);
+  let number = readLine.question(">");
+  while (invalidNumber(number)) {
     prompt(invalidInput);
-    num2 = readLine.question(">");
+    number = readLine.question(">");
   }
+  return number;
+};
 
-  prompt(question3);
+const askForOperation = () => {
+  prompt(operationType);
   let operation = readLine.question(">");
 
   while (!POSSIBLE_OPERATIONS.includes(operation)) {
     prompt(invalidOperation);
     operation = readLine.question(">");
   }
+  return operation;
+};
 
+const calculate = (number1, number2, operationType) => {
   let output;
-
-  switch (operation) {
+  switch (operationType) {
     case "1":
-      output = Number(num1) + Number(num2);
+      output = Number(number1) + Number(number2);
       break;
     case "2":
-      output = Number(num1) - Number(num2);
+      output = Number(number1) - Number(number2);
       break;
     case "3":
-      output = Number(num1) * Number(num2);
+      output = Number(number1) * Number(number2);
       break;
     case "4":
-      output = Number(num1) / Number(num2);
+      output = Number(number1) / Number(number2);
       break;
   }
-  prompt(result + output);
+  return output;
+};
 
-  prompt(question4);
+const calculateAgain = () => {
   let userAnswer = getUserInput();
-
   while (userAnswer[0] !== "n" && userAnswer[0] !== "y") {
-    prompt(playAgain);
+    prompt(newOperation);
     userAnswer = getUserInput();
   }
+  return userAnswer;
+};
+
+prompt(intro);
+
+while (true) {
+  let num1 = askForFirstNumber();
+  let num2 = askForSecondNumber();
+  let operation = askForOperation();
+
+  let getOutput = calculate(num1, num2, operation);
+  prompt(result + getOutput);
+
+  prompt(runAgain);
+  let userAnswer = calculateAgain();
 
   if (userAnswer[0] === "n") {
     prompt(outro);
