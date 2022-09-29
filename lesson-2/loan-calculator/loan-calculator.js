@@ -15,14 +15,22 @@ const yearsToMonths = (years) => years * NUM_MONTHS_IN_YEAR;
 const calculateMonthlyInterest = (aprPercentage) => {
   return parseFloat(aprPercentage) / 100 / NUM_MONTHS_IN_YEAR;
 };
-
-function loanResult(loanAmount, apr, loanDuration) {
+const calculateMonthlyPayment = (amount, apr, duration) => {
   let monthlyInterest = calculateMonthlyInterest(apr);
-  let monthlyLoanDuration = yearsToMonths(loanDuration);
+  let monthlyLoanDuration = yearsToMonths(duration);
   let monthlyPayment =
-    loanAmount *
+    amount *
     (monthlyInterest /
       (1 - Math.pow(1 + monthlyInterest, -monthlyLoanDuration)));
+  return monthlyPayment;
+};
+
+function loanResult(amountRequested, aprRate, durationWanted) {
+  let monthlyPayment = calculateMonthlyPayment(
+    amountRequested,
+    aprRate,
+    durationWanted
+  );
   return `The monthly payment will be: $${monthlyPayment.toFixed(2)}`;
 }
 
