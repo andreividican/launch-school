@@ -1,4 +1,5 @@
 const readLine = require("readline-sync");
+const NUM_MONTHS_IN_YEAR = 12;
 
 const prompt = (msg) => console.log(`>>> ${msg}`);
 
@@ -10,9 +11,9 @@ const loanDuration = readLine.questionFloat();
 prompt("What is the APR?");
 const annualPercentageRate = readLine.questionFloat();
 
-const yearsToMonths = (years) => years * 12;
+const yearsToMonths = (years) => years * NUM_MONTHS_IN_YEAR;
 const calculateMonthlyInterest = (aprPercentage) => {
-  return parseFloat(aprPercentage) / 100 / 12;
+  return parseFloat(aprPercentage) / 100 / NUM_MONTHS_IN_YEAR;
 };
 
 function loanResult(loanAmount, apr, loanDuration) {
