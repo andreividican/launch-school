@@ -1,5 +1,6 @@
 const readLine = require("readline-sync");
 const NUM_MONTHS_IN_YEAR = 12;
+const NUMBER_ZERO = 0;
 
 const prompt = (msg) => console.log(`>>> ${msg}`);
 const yearsToMonths = (years) => {
@@ -9,7 +10,7 @@ const yearsToMonths = (years) => {
 const isValidLoanAmount = (loan) => {
   prompt(`What amount would you like to borrow?`);
   loan = readLine.questionFloat();
-  while (loan <= 0) {
+  while (loan <= NUMBER_ZERO) {
     prompt("Please enter a valid amount. Amount has to be greater than 0.");
     loan = readLine.questionFloat();
   }
@@ -20,7 +21,7 @@ const isValidLoanAmount = (loan) => {
 const isValidYear = (duration) => {
   prompt("For how many years?");
   duration = readLine.questionFloat();
-  while (!Number.isInteger(duration) || duration <= 0) {
+  while (!Number.isInteger(duration) || duration <= NUMBER_ZERO) {
     prompt("Invalid number of years. Please enter a whole number.");
     duration = readLine.questionFloat();
   }
@@ -36,7 +37,7 @@ const calculateMonthlyPayment = (amount, apr, duration) => {
   let monthlyInterest = calculateMonthlyInterest(apr);
   let monthlyLoanDuration = yearsToMonths(duration);
   let monthlyPayment;
-  if (apr === 0) {
+  if (apr === NUMBER_ZERO) {
     monthlyPayment = amount / monthlyLoanDuration;
   } else {
     monthlyPayment =
