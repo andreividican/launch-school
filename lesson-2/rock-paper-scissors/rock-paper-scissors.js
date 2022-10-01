@@ -31,14 +31,14 @@ const playerWins = (userChoice, computerChoice) => {
 };
 
 const displayWinner = (userChoice, computerChoice) => {
-  prompt(`You chose ${userChoice}, the computer chose ${computerChoice}`);
+  prompt(`You chose ${userChoice.toUpperCase()}, the computer chose ${computerChoice.toUpperCase()}`);
 
   if (playerWins(userChoice, computerChoice)) {
-    prompt("You won!");
+    prompt("🎉 Congratulation, you have won! 🎉");
   } else if (userChoice === computerChoice) {
     prompt("It's a tie");
   } else {
-    prompt("Computer won!");
+    prompt("The Computer won!");
   }
 };
 
@@ -46,28 +46,45 @@ const getUserInput = () => {
   return readLine.question(">").toLowerCase();
 };
 
+const getUserChoice = (choice) => {
+  choice = getUserInput();
+
+  while (!POSSIBLE_CHOICES.includes(choice)) {
+    prompt("That's not a valid choice. Please try again.");
+    choice = getUserInput();
+  }
+
+  return choice;
+};
+
+const getComputerChoice = () => {
+  let randomIndex = Math.floor(Math.random() * POSSIBLE_CHOICES.length);
+  let choice = POSSIBLE_CHOICES[randomIndex];
+
+  return choice;
+};
+
+const playAgain = () => {
+  let answer = getUserInput();
+  while (answer !== "n" && answer !== "y") {
+    prompt('Please enter "y" or "n"');
+    answer = getUserInput();
+  }
+
+  return answer;
+};
+
 prompt(`RULES: \n${RULES.join("\n")}`);
 
 while (true) {
   prompt(`Choose one: ${POSSIBLE_CHOICES.join(", ")}`);
-  let userChoice = getUserInput();
-
-  while (!POSSIBLE_CHOICES.includes(userChoice)) {
-    prompt("That's not a valid choice. Please try again.");
-    userChoice = getUserInput();
-  }
-
-  let randomIndex = Math.floor(Math.random() * POSSIBLE_CHOICES.length);
-  let computerChoice = POSSIBLE_CHOICES[randomIndex];
+  let userChoice = getUserChoice();
+  let computerChoice = getComputerChoice();
 
   displayWinner(userChoice, computerChoice);
 
-  prompt("Would you like to play again? (y/n)");
-  let userAnswer = getUserInput();
-  while (userAnswer[0] !== "n" && userAnswer[0] !== "y") {
-    prompt('Please enter "y" or "n"');
-    userAnswer = getUserInput();
-  }
+  prompt("Would you like to play again?");
+  let userAnswer = playAgain();
 
-  if (userAnswer[0] === "n") break;
+  if (userAnswer === "n") break;
 }
