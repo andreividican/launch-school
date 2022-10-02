@@ -1,7 +1,15 @@
-// Given a string, return a new string
-// that replaces every occurrence of the word "important" with "urgent":
-let advice = "Few things in life are as important as house training your pet dinosaur.";
-let adviceTwo = "I like ice-cream, you like ice-cream, everybody likes ice-cream";
+// eslint-disable-next-line max-len
+// Write three different ways to remove all of the elements from the following array:
+let numbers = [1, 2, 3, 4];
 
-advice.replace('important', 'urgent');
-adviceTwo.replaceAll('ice-cream', 'chocolate');
+numbers.splice();
+numbers.slice(0, 0);
+
+// Solution 1
+numbers.length = 0;
+// Solution 2
+numbers.splice(0, numbers.length);
+// Solution 3
+while (numbers.length) {
+  numbers.pop();
+}

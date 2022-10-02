@@ -1,10 +1,12 @@
-// Given a number and an array,
-// determine whether the number is included in the array.
+/* eslint-disable max-len */
+// What will the following code output?
+let str1 = "hello there";
+let str2 = str1;
+str2 = "goodbye!";
+console.log(str1); // hello there
 
-let numbers = [1, 2, 3, 4, 5, 15, 16, 17, 95, 96, 99];
-
-let number1 = 8;  // false
-numbers.includes(number1);
-
-let number2 = 95; // true
-numbers.includes(number2);
+// Solution
+// The output is hello there since we are dealing with strings. In JavaScript,
+// strings are primitive values and are immutable; they can't be changed.
+//  That also means that JavaScript creates a new copy of the string when assigning a string to a variable.
+//   Thus, line 2 assigns str2 a new string that happens to be a copy of str1's value. Line 3, in turn, assigns str2 to an entirely new string.
