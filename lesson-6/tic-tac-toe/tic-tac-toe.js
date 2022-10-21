@@ -13,10 +13,25 @@ const WINNING_OPTIONS = [
   [1, 5, 9],
   [3, 5, 7],
 ];
+const TOTAL_NUMBER_OF_SQUARES = 9;
 
 function prompt(msg) {
-  console.log(`=> ${msg}`);
+  console.log(`>>> ${msg}`);
 }
+
+const getUserInput = () => {
+  return readline.question(">").toLowerCase();
+};
+
+const restartGame = () => {
+  let answer = getUserInput();
+  while (answer !== "n" && answer !== "y") {
+    prompt('Please enter "y" or "n"');
+    answer = getUserInput();
+  }
+
+  return answer;
+};
 
 function displayBoard(board) {
   console.clear();
@@ -41,7 +56,7 @@ function displayBoard(board) {
 function initializeBoard() {
   let board = {};
 
-  for (let square = 1; square <= 9; square++) {
+  for (let square = 1; square <= TOTAL_NUMBER_OF_SQUARES; square++) {
     board[String(square)] = INITIAL_MARKER;
   }
 
@@ -139,9 +154,9 @@ while (true) {
     prompt("It's a tie!");
   }
 
-  prompt("Play again? (y or n)");
-  let answer = readline.question().toLowerCase()[0];
-  if (answer !== "y") break;
+  prompt("Would you like to play again? (y/n)");
+  let userAnswer = restartGame();
+  if (userAnswer === "n") break;
 }
 
 prompt("Thanks for playing Tic Tac Toe");
